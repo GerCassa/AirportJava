@@ -11,6 +11,7 @@ public class AirportTest {
     Passenger passenger;
     FlightTicket ticket;
     Flight flight;
+    Flight flight2;
 
     @Before
     public void before() {
@@ -19,6 +20,7 @@ public class AirportTest {
         plane2 = new Plane(PlaneType.Boeing777, "EasyJet");
         passenger = new Passenger("German");
         flight = new Flight(plane.getType(), 4, "London");
+        flight2 = new Flight(plane2.getType(), 5, "Glasgow");
         ticket = new FlightTicket(flight, passenger);
     }
 
@@ -54,5 +56,25 @@ public class AirportTest {
     public void canSellTicket() {
         airport.sellTicket(flight, passenger);
         assertEquals(1, airport.ticketsCount());
+    }
+
+    @Test
+    public void ticketsSoldPerFlight() {
+        airport.sellTicket(flight, passenger);
+        airport.sellTicket(flight, passenger);
+        //1 too many shouldnt add. Plane is full.
+        airport.sellTicket(flight, passenger);
+
+        airport.sellTicket(flight2, passenger);
+        airport.sellTicket(flight2, passenger);
+        airport.sellTicket(flight2, passenger);
+        airport.sellTicket(flight2, passenger);
+        //1 too many, shouldnt add. Plane is full.
+        airport.sellTicket(flight2, passenger);
+        airport.sellTicket(flight2, passenger);
+        airport.sellTicket(flight2, passenger);
+        airport.sellTicket(flight2, passenger);
+        assertEquals(6, airport.ticketsCount());
+        assertEquals(4, airport.ticketsPerFlight(5));
     }
 }

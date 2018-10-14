@@ -68,7 +68,22 @@ public class Airport {
     }
 
     public void sellTicket(Flight flight, Passenger passenger){
-        FlightTicket newTicket = new FlightTicket(flight, passenger);
-        ticketsSold.add(newTicket);
+        if (flight.getPlane().getValue() > ticketsPerFlight(flight.getFlightNumber())) {
+            FlightTicket newTicket = new FlightTicket(flight, passenger);
+            ticketsSold.add(newTicket);
+        }
+    }
+
+    public int ticketsPerFlight(int flightNumber) {
+        String flightDest = null;
+        ArrayList thisFlight = new ArrayList<>();
+        for (FlightTicket tik : ticketsSold) {
+            if (tik.getFlight().getFlightNumber() == flightNumber) {
+                flightDest = tik.getFlight().getDestination();
+                thisFlight.add(tik);
+            }
+        }
+//        System.out.printf("There are %s passenger(s) going to %s" , thisFlight.size(), flightDest);
+        return thisFlight.size();
     }
 }

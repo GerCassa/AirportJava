@@ -1,6 +1,6 @@
 public enum PlaneType {
-    Boeing777(400),
-    AirbusA34(295);
+    Boeing777(4),
+    AirbusA34(2);
 
     private final int value;
 
