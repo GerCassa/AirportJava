@@ -1,18 +1,18 @@
 public class Flight {
 
-    private PlaneType plane;
+    private PlaneType planeType;
     private int flightNumber;
     private String destination;
 
-    public Flight(PlaneType plane, int flightNumber, String destination) {
-        this.plane = plane;
+    public Flight(PlaneType planeType, int flightNumber, String destination) {
+        this.planeType = planeType;
         this.flightNumber = flightNumber;
         this.destination = destination;
     }
 
 
     public PlaneType getPlane() {
-        return plane;
+        return planeType;
     }
 
     public int getFlightNumber() {

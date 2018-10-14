@@ -10,6 +10,7 @@ public class FlightTest {
 
     @Before
     public void before() {
+        plane = new Plane(PlaneType.AirbusA34, "Austral");
         flight = new Flight(PlaneType.AirbusA34, 1, "Buenos Aires");
     }
 
