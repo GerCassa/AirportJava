@@ -33,4 +33,8 @@ public class Plane {
     public void addPassenger(Passenger passenger) {
         passengers.add(passenger);
     }
+
+    public PlaneType getPlaneType() {
+        return type;
+    }
 }

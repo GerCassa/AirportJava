@@ -47,9 +47,9 @@ public class Airport {
 
     }
 
-    public void newFlight(PlaneType planeType, int fNumber, String destination) {
-        if (getPlane(planeType).getType() == planeType) {
-        Flight newFlight = new Flight(planeType, fNumber ,destination);
+    public void newFlight(Plane plane, int fNumber, String destination) {
+        if (getPlane(plane.getType()) == plane) {
+        Flight newFlight = new Flight(plane, fNumber ,destination);
         flights.add(newFlight);}
     }
 
@@ -67,9 +67,10 @@ public class Airport {
         return ticketsSold.size();
     }
 
-    public void sellTicket(Flight flight, Passenger passenger){
-        if (flight.getPlane().getValue() > ticketsPerFlight(flight.getFlightNumber())) {
-            FlightTicket newTicket = new FlightTicket(flight, passenger);
+    public void sellTicket(int price, Flight flight, Passenger passenger){
+        if (flight.getPlane().getPlaneType().getValue() > ticketsPerFlight(flight.getFlightNumber())) {
+            FlightTicket newTicket = new FlightTicket(price, flight, passenger);
+            flight.getPlane().addPassenger(passenger);
             ticketsSold.add(newTicket);
         }
     }

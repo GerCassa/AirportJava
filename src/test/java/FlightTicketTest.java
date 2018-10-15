@@ -8,12 +8,13 @@ public class FlightTicketTest {
     FlightTicket ticket;
     Flight flight;
     Passenger passenger;
+    Plane plane;
 
     @Before
     public void before() {
         passenger = new Passenger("Vicky");
-        flight = new Flight(PlaneType.AirbusA34, 10, "Glasgow");
-        ticket = new FlightTicket(flight, passenger);
+        flight = new Flight(plane, 10, "Glasgow");
+        ticket = new FlightTicket(5, flight, passenger);
     }
 
     @Test
@@ -26,8 +27,8 @@ public class FlightTicketTest {
         assertEquals(10, flight.getFlightNumber());
     }
 
-//    @Test
-//    public void hasPrice() {
-//        assertEquals(5, ticket.getPrice());
-//    }
+    @Test
+    public void hasPrice() {
+        assertEquals(5, ticket.getPrice());
+    }
 }

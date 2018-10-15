@@ -19,9 +19,9 @@ public class AirportTest {
         plane = new Plane(PlaneType.AirbusA34, "Austral");
         plane2 = new Plane(PlaneType.Boeing777, "EasyJet");
         passenger = new Passenger("German");
-        flight = new Flight(plane.getType(), 4, "London");
-        flight2 = new Flight(plane2.getType(), 5, "Glasgow");
-        ticket = new FlightTicket(flight, passenger);
+        flight = new Flight(plane, 4, "London");
+        flight2 = new Flight(plane2, 5, "Glasgow");
+        ticket = new FlightTicket(5, flight, passenger);
     }
 
     @Test
@@ -46,35 +46,40 @@ public class AirportTest {
     public void canCreateFlight() {
         airport.addPlane(plane);
         airport.addPlane(plane2);
-        airport.newFlight(PlaneType.AirbusA34, 1, "Buenos Aires");
-        airport.newFlight(PlaneType.Boeing777, 2, "London");
+        airport.newFlight(plane, 1, "Buenos Aires");
+        airport.newFlight(plane2, 2, "London");
         assertEquals(2, airport.flightsCount());
 //        System.out.println(airport.getFlights());
     }
 
     @Test
     public void canSellTicket() {
-        airport.sellTicket(flight, passenger);
+        airport.sellTicket(5, flight, passenger);
         assertEquals(1, airport.ticketsCount());
     }
 
     @Test
     public void ticketsSoldPerFlight() {
-        airport.sellTicket(flight, passenger);
-        airport.sellTicket(flight, passenger);
+        airport.sellTicket(5, flight, passenger);
+        airport.sellTicket(5, flight, passenger);
         //1 too many shouldnt add. Plane is full.
-        airport.sellTicket(flight, passenger);
+        airport.sellTicket(5, flight, passenger);
 
-        airport.sellTicket(flight2, passenger);
-        airport.sellTicket(flight2, passenger);
-        airport.sellTicket(flight2, passenger);
-        airport.sellTicket(flight2, passenger);
+        airport.sellTicket(5, flight2, passenger);
+        airport.sellTicket(6, flight2, passenger);
+        airport.sellTicket(7, flight2, passenger);
+        airport.sellTicket(6, flight2, passenger);
         //1 too many, shouldnt add. Plane is full.
-        airport.sellTicket(flight2, passenger);
-        airport.sellTicket(flight2, passenger);
-        airport.sellTicket(flight2, passenger);
-        airport.sellTicket(flight2, passenger);
+        airport.sellTicket(6, flight2, passenger);
+        airport.sellTicket(6, flight2, passenger);
+        airport.sellTicket(6, flight2, passenger);
+        airport.sellTicket(6, flight2, passenger);
         assertEquals(6, airport.ticketsCount());
         assertEquals(4, airport.ticketsPerFlight(5));
+    }
+
+    @Test
+    public void planeHasPassenger() {
+
     }
 }
